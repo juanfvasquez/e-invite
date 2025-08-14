@@ -1,0 +1,108 @@
+html,
+body {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.container {
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+}
+
+.box {
+	width: 100%;
+	max-width: 900px;
+	background-image: url(./assets/background.gif);
+	background-size: contain;
+	background-position: top;
+	background-repeat: no-repeat;
+}
+
+.name {
+	position: absolute;
+	left: 0;
+	width: 100%;
+	text-align: center;
+	font-weight: 500;
+	color: #fff;
+	font-family: 'Felix';
+}
+
+.time {
+	position: absolute;
+	left: 0;
+	right: 0;
+	text-align: center;
+	font-weight: 500;
+	color: #000;
+	font-family: 'Felix';
+	padding: 0 15% 0 10%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-evenly;
+}
+
+.time-item-dots {
+	font-size: 1.5rem;
+	font-weight: 400;
+	color: #444;
+}
+
+.location-button-wrapper,
+.confirm-button-wrapper {
+	position: absolute;
+	left: 0;
+	right: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 100;
+}
+
+.location-button,
+.confirm-button {
+	position: absolute;
+	background-image: url(./assets/boton1.gif);
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+	width: 240px;
+	height: 40px;
+	cursor: pointer;
+	z-index: 100;
+	left: 50%;
+	transform: translateX(-50%);
+	font-family: 'Felix';
+	font-size: 15px;
+	color: #fff;
+	font-weight: 500;
+	text-transform: capitalize;
+	letter-spacing: 0.1em;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+@media (min-width: 768px) {
+	.time {
+		padding: 0 16% 0 12%;
+	}
+}
+
+@media (min-width: 768px) {
+	.location-button,
+	.confirm-button {
+		width: 300px;
+		height: 60px;
+		font-size: 25px;
+	}
+}
+
+@font-face {
+	font-family: 'Felix';
+	src: url(./assets/FELIXTI.TTF);
+}
