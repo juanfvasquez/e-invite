@@ -89,7 +89,7 @@
 		}
 		const boxWidth = document.querySelector('.box').offsetWidth
 		const top = boxWidth * 1.576
-
+		console.log('🚀 ~ addTimeObjects ~ top:', top)
 		timeElement = document.createElement('div')
 		timeElement.classList.add('time')
 		timeElement.style.top = `${top}px`
@@ -123,12 +123,15 @@
 
 	const addTime = () => {
 		clearInterval(interval)
-		const now = dayjs()
-		if (now.isAfter(date)) {
-			addTimeObjects(0, 0, 0, 0)
-			return
-		}
 		interval = setInterval(() => {
+			const now = dayjs()
+			console.log('🚀 ~ addTime ~ now:', now)
+			console.log('🚀 ~ addTime ~ date:', date)
+			console.log('🚀 ~ addTime ~ now.isAfter(date):', now.isAfter(date))
+			if (now.isAfter(date)) {
+				addTimeObjects(0, 0, 0, 0)
+				return
+			}
 			const diff = Math.abs(now.diff(date, 'second'))
 			const days = Math.floor(diff / 86400)
 			let remainingTime = diff % 86400
@@ -220,6 +223,6 @@
 			addTime()
 			addLocationButton()
 			addConfirmButton()
-		}, 300)
+		}, 100)
 	})
 })()
