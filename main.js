@@ -59,20 +59,9 @@
 	audio.loop = true
 	audio.volume = 0.4
 
-	const playAudio = () => {
-		audio.play().catch((error) => {
-			console.log('Autoplay no permitido:', error)
-			document.addEventListener(
-				'scroll',
-				() => {
-					audio
-						.play()
-						.catch((err) => console.log('Error reproduciendo audio:', err))
-				},
-				{ once: true }
-			)
-		})
-	}
+	document.addEventListener('scroll', () => {
+		audio.play().catch((err) => console.log('Error reproduciendo audio:', err))
+	})
 
 	const addName = () => {
 		let nameElement = document.querySelector('.name')
@@ -205,9 +194,6 @@
 		addTime()
 		addLocationButton()
 		addConfirmButton()
-
-		// Reproducir audio cuando se carga la página
-		playAudio()
 	})
 
 	window.addEventListener('beforeunload', () => {
