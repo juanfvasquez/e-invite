@@ -82,30 +82,20 @@
 		box.appendChild(nameElement)
 	}
 
-	const addTime = () => {
-		clearInterval(interval)
-		interval = setInterval(() => {
-			let timeElement = document.querySelector('.time')
-			if (timeElement) {
-				timeElement.remove()
-			}
-			const now = dayjs()
-			const diff = Math.abs(now.diff(date, 'second'))
-			const days = Math.floor(diff / 86400)
-			let remainingTime = diff % 86400
-			const hours = Math.floor(remainingTime / 3600)
-			remainingTime %= 3600
-			const minutes = Math.floor(remainingTime / 60)
-			const seconds = remainingTime % 60
+	const addTimeObjects = (days, hours, minutes, seconds) => {
+		let timeElement = document.querySelector('.time')
+		if (timeElement) {
+			timeElement.remove()
+		}
+		const boxWidth = document.querySelector('.box').offsetWidth
+		const top = boxWidth * 1.576
 
-			const boxWidth = document.querySelector('.box').offsetWidth
-			const top = boxWidth * 1.576
-
-			timeElement = document.createElement('div')
-			timeElement.classList.add('time')
-			timeElement.style.top = `${top}px`
-			timeElement.style.fontSize = `${boxWidth * 0.065}px`
-			timeElement.innerHTML = `
+		timeElement = document.createElement('div')
+		timeElement.classList.add('time')
+		timeElement.style.top = `${top}px`
+		timeElement.style.fontSize = `${boxWidth * 0.065}px`
+		timeElement.style.color = 'white'
+		timeElement.innerHTML = `
 					<div class="time-item-value">${
 						days.toString().length === 1 ? '0' : ''
 					}${days}</div>
@@ -128,7 +118,25 @@
 						seconds.toString().length === 1 ? '0' : ''
 					}${seconds}</div>
 			`
-			box.appendChild(timeElement)
+		box.appendChild(timeElement)
+	}
+
+	const addTime = () => {
+		clearInterval(interval)
+		const now = dayjs()
+		if (now.isAfter(date)) {
+			addTimeObjects(0, 0, 0, 0)
+			return
+		}
+		interval = setInterval(() => {
+			const diff = Math.abs(now.diff(date, 'second'))
+			const days = Math.floor(diff / 86400)
+			let remainingTime = diff % 86400
+			const hours = Math.floor(remainingTime / 3600)
+			remainingTime %= 3600
+			const minutes = Math.floor(remainingTime / 60)
+			const seconds = remainingTime % 60
+			addTimeObjects(days, hours, minutes, seconds)
 		}, 1000)
 	}
 
