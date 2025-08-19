@@ -32,7 +32,7 @@
 		'Juan Esteban Marín ',
 		'Juan Andrés Alvarez ',
 		'Juan Fernando Isaza',
-		'Tomás Zambrano',
+		'Juan Martín Alzate',
 		'Simón Vargas',
 		'Valery Cárdenas ',
 		'Sofia Buriticá',
@@ -54,6 +54,25 @@
 	const box = document.querySelector('.box')
 	const date = dayjs('2025-09-20T15:00:00')
 	let interval
+
+	const audio = new Audio('./assets/sound.mp3')
+	audio.loop = true
+	audio.volume = 0.4
+
+	const playAudio = () => {
+		audio.play().catch((error) => {
+			console.log('Autoplay no permitido:', error)
+			document.addEventListener(
+				'scroll',
+				() => {
+					audio
+						.play()
+						.catch((err) => console.log('Error reproduciendo audio:', err))
+				},
+				{ once: true }
+			)
+		})
+	}
 
 	const addName = () => {
 		let nameElement = document.querySelector('.name')
@@ -186,6 +205,9 @@
 		addTime()
 		addLocationButton()
 		addConfirmButton()
+
+		// Reproducir audio cuando se carga la página
+		playAudio()
 	})
 
 	window.addEventListener('beforeunload', () => {
