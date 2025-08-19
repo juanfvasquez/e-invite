@@ -59,7 +59,7 @@
 	audio.loop = true
 	audio.volume = 0.4
 
-	document.addEventListener('scroll', () => {
+	document.addEventListener('click', () => {
 		audio.play().catch((err) => console.log('Error reproduciendo audio:', err))
 	})
 
@@ -97,8 +97,6 @@
 			remainingTime %= 3600
 			const minutes = Math.floor(remainingTime / 60)
 			const seconds = remainingTime % 60
-
-			console.log(days, hours, minutes, seconds)
 
 			const boxWidth = document.querySelector('.box').offsetWidth
 			const top = boxWidth * 1.576
